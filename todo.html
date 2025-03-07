@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- navBar -->
+    <nav class="navBar">
+        <div class="logo">
+            <h1 id="logo">Personalized <span>ToDos</span></h1>
+        </div>
+
+        <div class="nav-links">
+            <ul id="buttons">
+                <li class="new">Create</li>
+                <li class="">Todos</li>
+                <li class="">Completed</li>
+                <li class="">Pending</li>
+                <li class="fav">Favorites</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- New Todo Section -->
+    <div class="newTodoContainer">
+        <h1 id="heading">Create new ToDo</h1>
+
+        <div class="header">
+            <h3>Add Title...!</h3>
+            <input type="text" name="title" id="title" placeholder="Give a title">
+        </div>
+
+        <div class="addContent">
+            <h3>Describe your plan...!</h3>
+            <textarea name="content" id="content"
+                placeholder="Make note of your things which you want to remind and remember...!"></textarea>
+        </div>
+
+        <div class="tags">
+            <h3>Give a Tag...!</h3>
+            <select name="tags" id="tags">
+                <option value="important">Imp</option>
+                <option value="repeat">Act</option>
+                <option value="meetings">Meet</option>
+                <option value="days">Memories</option>
+            </select>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" id="newTodo">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+
+    </div>
+
+    <!-- Created/Existing Todos of the user -->
+     <div class="existingTodos">
+        <div class="header">
+            <div class="nameSection">
+                <h3>Name: <span>Lucid</span></h3>
+            </div>
+            <div class="detailsSection">
+                <h3>Total Todos: <span>10</span></h3>
+                <h3>Favs: <span>10</span></h3>
+                <h3>Pending: <span>05</span></h3>
+            </div>
+        </div>
+        <div class="mainSection">
+            <h2>Your Todos</h2>
+        </div>
+     </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

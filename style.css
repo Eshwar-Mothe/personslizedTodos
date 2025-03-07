@@ -1,0 +1,385 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background: var(--bodyBackgroundColor) no-repeat center center / cover;
+    height: 100dvh;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+:root{
+    --buttonHover: #d76d77;
+    --cursorStyle: pointer;
+    --borderWidth: 2px;
+    --borderColor:#ffaf7b;
+    --borderStyle: none none solid none;
+    --headingFont: 2rem;
+    --subHeadingFont: .5rem;
+    --paddingBlock: .5rem;
+    --paddingInline: 2rem;
+    --buttonColor: rgb(196, 199, 169);
+    --borderRadius: 10px;
+    --bodyBackgroundColor: linear-gradient(95deg, #3a1c71, #d76d77, #ffaf7b);
+}
+
+/* NavBar Styling */
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: var(--paddingInline); /* need to adjust in responsive */
+    padding-block: var(--paddingBlock); /* need to adjust in responsive */
+    border-width: var(--borderWidth);
+    border-style:var(--borderStyle);
+    border-color:var(--borderColor);
+    background: rgb(35, 46, 68);
+}
+
+.logo{
+    color: white;
+}
+.logo span{
+    color: var(--borderColor);
+}
+
+.nav-links ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem; /* need to adjust in responsive */
+}
+
+.nav-links ul li{
+    color: var(--borderColor);
+    padding: .5rem 1rem;
+    border-radius: var(--borderRadius);
+    &:hover{
+        color: var(--buttonHover);
+        transition: .5s;
+        cursor: var(--cursorStyle);
+    } 
+}
+
+.heroSection{
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: var(--bodyBackgroundColor);
+}
+
+.contentSection {
+    font-size: var(--headingFont);
+    padding-inline: var(--paddingInline);
+    /* width: 100%; */
+}
+
+
+
+.contentSection p{
+    color: var(--buttonColor);
+}
+
+.contentSection ul{
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+}
+
+.contentSection ul li{
+    color: rgb(59, 41, 41);
+    cursor: var(--cursorStyle);
+    background-color: rgba(255, 255, 255, 0.425);
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+    border-radius: var(--borderRadius);
+    font-size: 1.5rem;
+    &:hover{
+        color: white;
+    }
+}
+
+.imgSection{
+    width: 80%;
+}
+
+.imgSection img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.smallScreens{
+    display: none;
+}
+
+@media (max-width: 900px){
+    .container{
+        display: none;
+    }
+}
+
+@media(width <= 900px){
+    .smallScreens{
+        display: block;
+    }
+}
+
+
+/* SignUp Form Styles */
+
+#heading, #tagLine{
+    text-align: center;
+    padding-block: var(--paddingBlock);
+    color: white;
+}
+
+.signup-container{
+    border: 2px solid rgb(255, 255, 255);
+    border-radius:15px ;
+    box-shadow: 0 2px 10px rgb(128, 123, 123);
+    width: 50%;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    padding-block:var(--paddingInline);
+    padding-inline: var(--paddingBlock);
+}
+
+.signup-container form{
+    padding-inline: var(--paddingBlock);
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+}
+
+.signup-container form .nameSection,
+.signup-container form .contactSection,
+.signup-container form .passwordSection{
+    display: flex;
+    gap: 2rem;
+}
+
+.signup-container form input,select{
+    width: 100%;
+    border-radius: var(--borderRadius);
+    border-style: none;
+    padding-block: var(--paddingBlock);
+    padding-inline: .5rem;
+    background: transparent;
+    border: 2px solid #6e6e6e;
+    margin-block-end: 1rem;
+}
+
+.signup-container{
+    background: rgba(0, 0, 0, 0.377);
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+form #getOtp,.buttons button {
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+    color: rgb(62, 12, 68);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--borderRadius);
+    cursor: var(--cursorStyle);
+    /* left: 50%; */
+    &:hover{
+        color: #ffaf7b;
+        background-color: rgb(48, 48, 48);
+    }
+}
+
+form select{
+    width: 100%;
+    padding-block: var(--paddingBlock);
+    color: white;
+}
+
+form select option{
+    color: #3a1c71;
+}
+
+
+/* OTP Box Stylings */
+
+#otpBox{
+    border: 2px solid white;
+    width: 50%;
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+    border-radius: var(--borderRadius);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: center;
+}
+
+#otpBox form input{
+    padding-block:.5rem;
+    padding-inline: .2rem;
+    width: 50%;
+    margin-block-end: .5rem;
+    border-radius: var(--borderRadius);
+    border-style: none;
+}
+
+#otpSubmit{
+    background-color: #ffaf7b;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #180a31;
+}
+
+/* LogIn Page Styles */
+
+.heading{
+    text-align: center;
+    margin-inline: var(--paddingInline);
+    margin-block: var(--paddingBlock);
+    cursor: default;
+}
+
+.loginContainer{
+    border: 2px solid white;
+    padding-inline: var(--paddingInline);
+    padding-block: var(--paddingBlock);
+    border-radius: var(--borderRadius);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.7);
+}
+
+.loginContainer input{
+    padding-inline: var(--paddingInline);
+    padding-inline-start: .5rem;
+    padding-block: var(--paddingBlock);
+    margin-inline: var(--paddingInline);
+    margin-block: var(--paddingBlock);
+    background: rgba(180, 180, 180, 0.438);
+    border-style: solid;
+    border-color: white;
+    border-radius: var(--borderRadius);
+}
+
+.loginContainer label {
+    color: rgb(241, 232, 146);
+    font-weight: 700;
+    font-size: 1rem;
+
+}
+
+.loginContainer input[type="submit"]{
+    margin-inline:35%;
+    margin-block: var(--paddingBlock);
+    padding-inline: var(--paddingInline) !important;
+    background: transparent;
+    color: rgb(241, 232, 146);
+    font-weight: 700;
+}
+
+.loginContainer h2{
+    color: rgb(241, 232, 146);
+}
+
+/* New Todo Container */
+.newTodoContainer{
+    border:2px solid white;
+    border-radius: 10px;
+    width: 60%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% ,-50%);
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: space-around;
+    align-items:stretch;
+    color: white;
+}
+
+.newTodoContainer input{
+    width: 50%;
+    border-style: none;
+    background-color: #31313171;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.newTodoContainer .addContent textarea{
+    width: 80% !important;
+    height: 20dvh;
+    padding: .5rem;
+    resize: none;
+    word-wrap: break-word;
+    background-color: #31313171;
+    border-radius: 10px;
+
+}
+
+.newTodoContainer select{
+    width: 50%;
+}
+
+
+/* Existing Todos Styles */
+.existingTodos .header{
+    padding-block-start: 1rem;
+}
+.existingTodos .header,
+.existingTodos .header .detailsSection{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-inline: .5rem;
+}
+.existingTodos .header h3{
+    font-weight: 400;
+}
+
+.existingTodos .header span{
+    color: white;
+    font-weight: 500;
+}
+
+.existingTodos .mainSection{
+    margin: auto;
+    margin-block-start: 2rem;
+    width: 70%;
+    border: 2px solid white;
+    height: 70vh;
+}
+
+.existingTodos .mainSection h2{
+    text-align: center;
+    padding-block: .5rem;
+}

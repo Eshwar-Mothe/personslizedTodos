@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navBar">
+        <div class="logo">
+            <h1 id="logo">Personalized <span>ToDos</span></h1>
+        </div>
+
+        <div class="nav-links">
+            <ul id="buttons">
+                <li class="login">Log In</li>
+                <li class="signup">Sign Up</li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 id="heading">ToDo SignUp</h1>
+    <p id="tagLine">create account..!</p>
+    <div class="signup-container">
+        <form>
+            <div class="nameSection">
+                <div class="section">
+                    <label for="fname">First Name: </label>
+                    <input type="text" id="fname" placeholder="First Name">
+                </div>
+                <div class="section">
+                    <label for="lname">last Name: </label>
+                    <input type="text" id="lname" placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="contactSection">
+                <div class="section">
+                    <label for="email">User Email: </label>
+                    <input type="email" id="email" placeholder="Enter valid Email">
+                </div>
+                <div class="section">
+                    <label for="mobile">Mobile: </label>
+                    <input type="tel" id="mobile" placeholder="Mobile Number">
+                </div>
+            </div>
+
+            <div class="section">
+                <label for="gender">Gender: </label>
+
+                <select name="Gender" id="gender">
+                    <option selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Others</option>
+                </select>
+            </div>
+
+            <div class="passwordSection">
+                <div class="section">
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" placeholder="Enter Password">
+                </div>
+
+                <div class="section">
+                    <label for="cpassword">Confirm Password: </label>
+                    <input type="password" id="cpassword" placeholder="Confrim Password">
+                </div>
+            </div>
+
+
+            <button id="getOtp">Get OTP</button>
+        </form>
+    </div>
+    <div id="otpBox" style="display: none;">
+        <h3>Enter the OTP sent To Mail '<span id="UserMail"></span>'</h3>
+        <form class="OtpForm">
+            <label for="otp">OTP: </label><br>
+            <input type="text" id="otp" placeholder="Enter otp" required>
+            <br>
+            <input type="submit" value="Submit" id="otpSubmit">
+        </form>
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
