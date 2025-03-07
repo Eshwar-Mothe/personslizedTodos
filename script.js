@@ -40,14 +40,14 @@ signUpButtons.forEach((button) => {
 
 const otpButton = document.getElementById('getOtp')
 
-// otpButton.addEventListener('click', (e) => {
-//     e.preventDefault();
+otpButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-//     userDataStoring();
-//     existingUser();
+    userDataStoring();
+    existingUser();
     
-// }
-// );
+}
+);
 
 
 function userDataStoring(){
