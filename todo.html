@@ -32,18 +32,19 @@
 
         <div class="header">
             <h3>Add Title...!</h3>
-            <input type="text" name="title" id="title" placeholder="Give a title">
+            <input type="text" name="title" id="title" placeholder="Give a title" required>
         </div>
 
         <div class="addContent">
             <h3>Describe your plan...!</h3>
             <textarea name="content" id="content"
-                placeholder="Make note of your things which you want to remind and remember...!"></textarea>
+                placeholder="Make note of your things which you want to remind and remember...!" required>
+            </textarea>
         </div>
 
         <div class="tags">
             <h3>Give a Tag...!</h3>
-            <select name="tags" id="tags">
+            <select name="tags" id="tags" required>
                 <option value="important">Imp</option>
                 <option value="repeat">Act</option>
                 <option value="meetings">Meet</option>
@@ -52,15 +53,16 @@
         </div>
 
         <div class="buttons">
-            <button type="submit" id="newTodo">Submit</button>
-            <button type="reset">Reset</button>
+            <button id="newTodo" onclick="handleSubmitTodo()">Submit</button>
+            <button id="resetTodo" onclick="handleReset()">Reset</button>
         </div>
 
     </div>
 
     <!-- Created/Existing Todos of the user -->
-     <div class="existingTodos">
+    <div class="existingTodos">
         <div class="header">
+
             <div class="nameSection">
                 <h3>Name: <span>Lucid</span></h3>
             </div>
@@ -71,10 +73,36 @@
             </div>
         </div>
         <div class="mainSection">
-            <h2>Your Todos</h2>
+            <h2 id="heading">Your Todos</h2>
+            <div class="todoContainer">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>header1</th>
+                            <th>header2</th>
+                            <th>header3</th>
+                            <th>header4</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>data1</td>
+                            <td>data2</td>
+                            <td>data3</td>
+                            <td>data4</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
-     </div>
-    <script src="script.js"></script>
+    </div>
+    <!-- <script src="script.js"></script> -->
+
+    <script src="todo.js"></script>
+
 </body>
 
 </html>

@@ -30,42 +30,35 @@
 
     <div class="loginContainer">
         <h2 class="heading">Login</h2>
-        <form>
-            <label class="username">UserName: </label>
-            <input type="text" id="userName1">
+        <form >
+            <label class="useremail">UserEmail: </label>
+            <input type="text" id="loginmail" placeholder="Enter valid email id" required>
             
             <br>
 
             <label class="Password">Password: &nbsp;</label>
-            <input type="password" id="password">
+            <input type="password" id="loginpassword" placeholder="Enter your password" required>
             
             <br>
-
-            <input type="submit">
         </form>
+
+        <button onclick="handleLogin()" id="loginButton">Login</button>
+
     </div>
 
     <script src="script.js"></script>
 
-    <script>
-        // const loginButton = document.getElementById('login')
-        // const signUpButton2 = document.getElementById('signup')
+    <script type="text/javascript">
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-
-        // // Login page Navigation
-        // loginButton.addEventListener('click', () => {
-
-        //     location.href = 'http://127.0.0.1:5501/login.html'
-
-        // });
-
-
-        // // SignUp page Navigation
-        // signUpButton2.addEventListener('click', () => {
-        //     location.href = 'http://127.0.0.1:5501/signup.html'
-        // });
-
+        if (loggedInUser) {
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        }
     </script>
+    
 </body>
 
 </html>

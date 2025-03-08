@@ -7,7 +7,7 @@
 
 body{
     background: var(--bodyBackgroundColor) no-repeat center center / cover;
-    height: 100dvh;
+    /* height: 100dvh; */
 }
 
 ::-webkit-scrollbar{
@@ -124,14 +124,29 @@ body{
 }
 
 @media (max-width: 900px){
-    .container{
+    /* .container{
         display: none;
-    }
+    } */
 }
 
 @media(width <= 900px){
-    .smallScreens{
-        display: block;
+    .navBar{
+        padding-inline: .2rem;
+    }
+    
+    .heroSection{
+        flex-direction: column;
+    }
+
+    .nav-links #buttons{
+        padding: 0;
+        gap: 0;
+    }
+
+    .heroSection #buttons{
+        gap: .1rem;
+        width: auto !important;
+        flex-direction: column;
     }
 }
 
@@ -276,7 +291,7 @@ form select option{
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.7);
 }
 
-.loginContainer input{
+.loginContainer input, #loginButton{
     padding-inline: var(--paddingInline);
     padding-inline-start: .5rem;
     padding-block: var(--paddingBlock);
@@ -313,10 +328,7 @@ form select option{
     border:2px solid white;
     border-radius: 10px;
     width: 60%;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50% ,-50%);
+    margin: auto;
     padding-block: 1rem;
     padding-inline: 2rem;
     display: flex;
@@ -352,6 +364,10 @@ form select option{
 
 
 /* Existing Todos Styles */
+
+.existingTodos{
+    padding-block-end: 1rem;
+}
 .existingTodos .header{
     padding-block-start: 1rem;
 }
@@ -363,7 +379,12 @@ form select option{
     padding-inline: .5rem;
 }
 .existingTodos .header h3{
-    font-weight: 400;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.detailsSection h3{
+    color: #000000 !important;
 }
 
 .existingTodos .header span{
@@ -374,12 +395,34 @@ form select option{
 .existingTodos .mainSection{
     margin: auto;
     margin-block-start: 2rem;
-    width: 70%;
+    width: 90%;
     border: 2px solid white;
     height: 70vh;
+    border-radius: 10px;
 }
 
 .existingTodos .mainSection h2{
     text-align: center;
     padding-block: .5rem;
+    background-color:#180a31;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.todoContainer table{
+    width: 100%;
+}
+
+.todoContainer table thead{
+    background-color:#180a31;
+}
+
+.todoContainer table thead tr th{
+    color: white;
+    padding-block:.5rem;
+}
+
+.todoContainer table tbody tr td{
+    text-align: center;
 }

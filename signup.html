@@ -24,34 +24,34 @@
 
     <h1 id="heading">ToDo SignUp</h1>
     <p id="tagLine">create account..!</p>
-    <div class="signup-container">
-        <form>
+    <div class="signup-container" id="signUpContainer">
+        <form id="signupForm">
             <div class="nameSection">
                 <div class="section">
                     <label for="fname">First Name: </label>
-                    <input type="text" id="fname" placeholder="First Name">
+                    <input type="text" id="fname" placeholder="First Name" required>
                 </div>
                 <div class="section">
                     <label for="lname">last Name: </label>
-                    <input type="text" id="lname" placeholder="Last Name">
+                    <input type="text" id="lname" placeholder="Last Name" required>
                 </div>
             </div>
 
             <div class="contactSection">
                 <div class="section">
                     <label for="email">User Email: </label>
-                    <input type="email" id="email" placeholder="Enter valid Email">
+                    <input type="email" id="email" placeholder="Enter valid Email" required>
                 </div>
                 <div class="section">
                     <label for="mobile">Mobile: </label>
-                    <input type="tel" id="mobile" placeholder="Mobile Number">
+                    <input type="tel" id="mobile" placeholder="Mobile Number" required>
                 </div>
             </div>
 
             <div class="section">
                 <label for="gender">Gender: </label>
 
-                <select name="Gender" id="gender">
+                <select name="Gender" id="gender" required>
                     <option selected>Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -62,12 +62,12 @@
             <div class="passwordSection">
                 <div class="section">
                     <label for="password">Password: </label>
-                    <input type="password" id="password" placeholder="Enter Password">
+                    <input type="password" id="password" placeholder="Enter Password" required>
                 </div>
 
                 <div class="section">
                     <label for="cpassword">Confirm Password: </label>
-                    <input type="password" id="cpassword" placeholder="Confrim Password">
+                    <input type="password" id="cpassword" placeholder="Confrim Password" required>
                 </div>
             </div>
 
@@ -87,8 +87,7 @@
 
 
 
-    <script src="script.js"></script>
-
+    <script src="script.js" defer></script>
 
 </body>
 
