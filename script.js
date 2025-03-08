@@ -103,6 +103,7 @@ function userDataStoring() {
         document.getElementById('UserMail').innerHTML = userDetails.userMail
 
         generateOTP()
+        localStorage.setItem("loggedInUser", JSON.stringify(users));
     }
 }
 
