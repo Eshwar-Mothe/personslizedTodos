@@ -59,49 +59,76 @@
 
     </div>
 
+
     <!-- Created/Existing Todos of the user -->
     <div class="existingTodos">
         <div class="header">
 
             <div class="nameSection">
-                <h3>Name: <span>Lucid</span></h3>
+                <h3>Name: <span id="userName"></span></h3>
             </div>
             <div class="detailsSection">
-                <h3>Total Todos: <span>10</span></h3>
-                <h3>Favs: <span>10</span></h3>
-                <h3>Pending: <span>05</span></h3>
+                <h3>Total Todos: <span id="totalTodos">0</span></h3>
+                <h3>Favs: <span id="favTodos">0</span></h3>
+                <h3>Pending: <span id="pendingTodos">0</span></h3>
             </div>
         </div>
+
+        <div class="filterContainer">
+            <label for="filterSelect">Filter Todos:</label>
+            <select id="filterSelect" onchange="filterTodos()">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="favorite">Favorites</option>
+                <option value="pinned">Pinned</option>
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="shopping">Shopping</option>
+            </select>
+        </div>
+        
         <div class="mainSection">
             <h2 id="heading">Your Todos</h2>
             <div class="todoContainer">
                 <table>
                     <thead>
                         <tr>
-                            <th>header1</th>
-                            <th>header2</th>
-                            <th>header3</th>
-                            <th>header4</th>
+                            <th>s.no</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Tag</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>data1</td>
-                            <td>data2</td>
-                            <td>data3</td>
-                            <td>data4</td>
-                        </tr>
-
+                    <tbody id="todoTableBody">
 
                     </tbody>
                 </table>
             </div>
+
+            
+            <div id="todoModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalContent"></p>
+                    <p><strong>Tag:</strong> <span id="modalTag"></span></p>
+                    <p><strong>Created At:</strong> <span id="modalDate"></span></p>
+
+                    <div class="modal-buttons">
+                        <button onclick="handleComplete()" id="completeBtn" class="btn complete">Completed</button>
+                        <button onclick="handleFav()" id="favBtn" class="btn favorite">Favorite</button>
+                        <button onclick="handlePin()" id="pinBtn" class="btn pin">Pin</button>
+                        <button onclick="handleDelete()" id="deleteBtn" class="btn delete">Delete</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
 
-    <script src="todo.js"></script>
+    <script src="todo.js" defer></script>
 
 </body>
 
