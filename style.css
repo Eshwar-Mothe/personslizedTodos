@@ -7,7 +7,7 @@
 
 body{
     background: var(--bodyBackgroundColor) no-repeat center center / cover;
-    /* height: 100dvh; */
+    min-height: 100vh;
 }
 
 ::-webkit-scrollbar{
@@ -57,7 +57,8 @@ body{
     gap: 2rem; /* need to adjust in responsive */
 }
 
-.nav-links ul li{
+.nav-links ul li ,.nav-links ul li a{
+    text-decoration: none;
     color: var(--borderColor);
     padding: .5rem 1rem;
     border-radius: var(--borderRadius);
@@ -407,12 +408,39 @@ form select option{
     background-color:#180a31;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border: 2px solid white;
+    border-style: none none solid none;
 
 }
+
+/* main section styles */
+.mainSection {
+    max-width: 100%;
+    max-height: 450px; 
+    overflow: auto; /* Enables both vertical and horizontal scrolling */
+    border: 1px solid #ddd; /* Optional border */
+}
+
+.todoContainer thead {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Ensures it remains visible */
+    z-index: 100; /* Ensures it stays above table rows */
+    border-bottom: 2px solid black; /* Optional: Separates header */
+}
+
 
 .todoContainer table{
     width: 100%;
+    border-collapse: collapse;    
 }
+
+.todoContainer table td{
+    padding: .5rem;
+    border: 1px solid rgb(255, 255, 255);
+    border-style: solid none solid none;
+}
+
 
 .todoContainer table thead{
     background-color:#180a31;
@@ -425,6 +453,18 @@ form select option{
 
 .todoContainer table tbody tr td{
     text-align: center;
+    color: white;
+    font-size: 1rem;
+}
+
+.todoContainer table tbody #viewTodo{
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgba(41, 8, 8, 0.164);
 }
 
 
@@ -442,7 +482,7 @@ form select option{
 }
 
 .modal-content {
-    background: white;
+    background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 10px;
     width: 50%;
@@ -451,12 +491,17 @@ form select option{
     position: relative;
 }
 
+.modal-content #modalTitle{
+    color: white;
+}
+
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
+    top: 1.2rem;
+    right: 2rem;
+    font-size: 2rem;
     cursor: pointer;
+    color: white;
 }
 
 .modal-buttons {
@@ -476,3 +521,24 @@ form select option{
 .favorite {font-weight: 500; background: #f8e05a; color: black; }
 .pin {font-weight: 500; background: rgb(77, 77, 190); color: white; }
 .delete {font-weight: 500; background: rgb(252, 0, 0); color: rgb(255, 255, 255); }
+
+
+/* filterContainer */
+
+.filterContainer{
+    padding-inline: 2rem;
+    padding-block-start: 2rem;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.filterContainer #filterSelect{
+    width: 20%;
+    color: white;
+}
+
+.filterContainer #filterSelect option{
+    color: black;
+}

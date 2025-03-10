@@ -80,20 +80,36 @@ function displayTodos() {
 
     todoTableBody.innerHTML = ""; // Clear existing data
 
-    todos.forEach((todo, index) => {
+    if (todos.length > 0) {
+
+        todos.forEach((todo, index) => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${todo.isFavorite ? `⭐ ${todo.title}` : todo.title}</td>
+                <td>${todo.content.substring(0, 10)}...</td>
+                <td>${todo.tag}</td>
+                <td>${todo.createdAt}</td>
+                <td><button id='viewTodo' onclick="openModal(${todo.id})">View More</button></td>
+            `;
+
+            todoTableBody.appendChild(row);
+        });
+        updateTodoStats();
+    }
+    else {
+
         const row = document.createElement("tr");
-
         row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${todo.isFavorite ? `⭐ ${todo.title}` : todo.title}</td>
-            <td>${todo.content.substring(0, 10)}...</td>
-            <td>${todo.tag}</td>
-            <td><button onclick="openModal(${todo.id})">View More</button></td>
+            <td colspan="5" style="text-align:center; padding:20px;">
+                <img src="todo.png" alt="No Todos" style="width:300px; display:block; margin:auto;">
+                <p style="color:white; font-size:1.5rem;font-weight:500; margin-top:10px;">No Todos Available</p>
+            </td>
         `;
-
         todoTableBody.appendChild(row);
-    });
-    updateTodoStats();
+    }
+
 
 }
 
