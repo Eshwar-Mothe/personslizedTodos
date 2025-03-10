@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PersonalizedTodos-Existing</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <nav class="navBar">
+        <div class="logo">
+            <h1 id="logo">Personalized <span>ToDos</span></h1>
+        </div>
+
+        <div class="nav-links">
+            <ul id="buttons">
+                <li class="new"><a href="todo.html">Create</a></li>
+                <li class=""><a href="existing.html">Todos</a></li>
+                <li class=""><a href="completed.html">Completed</a></li>
+                <li class=""><a href="pending.html">Pending</a></li>
+                <li class="fav"><a href="fav.html">Favorites</a></li>
+            </ul>
+        </div>
+    </nav>
+    Existing Todos
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (!loggedInUser) {
+        if (users.length === 0) {
+            // If no users exist, redirect to signup
+            alert("No account found. Please sign up first.");
+            window.location.href = "signup.html";
+        } else {
+            // If users exist but no one is logged in, redirect to login
+            alert("Access Denied! Please log in first.");
+            window.location.href = "login.html";
+        }
+    }
+});
+    </script>
+</body>
+</html>
