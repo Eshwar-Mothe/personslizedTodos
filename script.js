@@ -6,7 +6,7 @@ const signUpButtons = document.querySelectorAll('.signup')
 
 console.log(loginButtons, signUpButtons)
 
-const baseUrl = 'http://127.0.0.1:5501/'
+const baseUrl = 'https://eshwar-mothe.github.io/personslizedTodos/'
 
 // Homepage Navigation
 homeButton.style.cursor = 'pointer'

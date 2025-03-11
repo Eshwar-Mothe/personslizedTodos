@@ -5,20 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PersonalizedTodos-Pendings</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navBar">
-        <div class="logo">
-            <h1 id="logo">Personalized <span>ToDos</span></h1>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <h1><a href="index.html" id="logo" style="color: white !important;"
+                    class="navbar-brand">Personalized<span> ToDos</span></a></h1>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
 
-        <div class="nav-links">
-            <ul id="buttons">
-                <li class="new"><a href="todo.html">Create</a></li>
-                <li class=""><a href="existing.html">Todos</a></li>
-                <li class=""><a href="completed.html">Completed</a></li>
-                <li class=""><a href="pending.html">Pending</a></li>
-                <li class="fav"><a href="fav.html">Favorites</a></li>
+        <div class="collapse navbar-collapse nav-links" id="navbarSupportedContent">
+            <ul id="buttons" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="todo.html">Create</a></li>
+                <li class="nav-item"><a class="nav-link" href="existing.html">Todos</a></li>
+                <li class="nav-item"><a class="nav-link" href="completed.html">Completed</a></li>
+                <li class="nav-item"><a class="nav-link" href="pending.html">Pending</a></li>
+                <li class="nav-item"><a class="nav-link" href="fav.html">Favorites</a></li>
             </ul>
         </div>
     </nav>
@@ -42,5 +50,10 @@
     }
 });
     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+crossorigin="anonymous"></script>
+
 </body>
 </html>

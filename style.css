@@ -28,9 +28,9 @@ body{
     --bodyBackgroundColor: linear-gradient(95deg, #3a1c71, #d76d77, #ffaf7b);
 }
 
-/* NavBar Styling */
+/* navbar Styling */
 
-.navBar{
+.navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,22 +39,18 @@ body{
     border-width: var(--borderWidth);
     border-style:var(--borderStyle);
     border-color:var(--borderColor);
-    background: rgb(35, 46, 68);
+    background: rgb(35, 46, 68) !important;
 }
 
 .logo{
     color: white;
 }
-.logo span{
+#logo span{
     color: var(--borderColor);
 }
 
 .nav-links ul{
     list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem; /* need to adjust in responsive */
 }
 
 .nav-links ul li ,.nav-links ul li a{
@@ -131,7 +127,7 @@ body{
 }
 
 @media(width <= 900px){
-    .navBar{
+    .navbar{
         padding-inline: .2rem;
     }
     
@@ -337,7 +333,7 @@ form select option{
     gap: .5rem;
     justify-content: space-around;
     align-items:stretch;
-    color: white;
+    color: white !important;
 }
 
 .newTodoContainer input{
@@ -375,9 +371,11 @@ form select option{
 .existingTodos .header,
 .existingTodos .header .detailsSection{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
     padding-inline: .5rem;
+
 }
 .existingTodos .header h3{
     font-weight: 500;
@@ -396,7 +394,7 @@ form select option{
 .existingTodos .mainSection{
     margin: auto;
     margin-block-start: 2rem;
-    width: 90%;
+    width: 100% !important;
     border: 2px solid white;
     height: 70vh;
     border-radius: 10px;
@@ -410,7 +408,7 @@ form select option{
     border-top-right-radius: 10px;
     border: 2px solid white;
     border-style: none none solid none;
-
+    width: 100% !important;
 }
 
 /* main section styles */
