@@ -34,7 +34,7 @@
                     <div class="avatar-container" onclick="toggleTooltip()">
                         <img id="userAvatar" class="avatar" src="todo.png" alt="User Avatar">
                         <div id="tooltipBox" class="tooltip-box">
-                            <p id="loggedUser"></p>
+                            <p id="loggedUsercmpltd"></p>
                             <div class="logout-btn" onclick="handleLogout(event)">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </div>
@@ -117,7 +117,7 @@
 
         function displayCompletedTodos() {
             console.log('triggering')
-            const completedTodoTableBody = document.getElementById("completedTodoTableBody");
+            const completedTodoTable = document.getElementById("completedTodoTableBody");
             const todosData = JSON.parse(localStorage.getItem("completedTodos")) || [];
             const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
@@ -136,7 +136,7 @@
             const completedTodos = userTodos;
             console.log(completedTodos)
 
-            completedTodoTableBody.innerHTML = "";
+            completedTodoTable.innerHTML = "";
 
             console.log(completedTodos.length)
 
@@ -238,10 +238,10 @@
         // Load user details from localStorage
         function loadUserDetails() {
             const user = JSON.parse(localStorage.getItem("loggedInUser"));
-
+            triggering
             if (user) {
                 console.log(user);
-                document.getElementById("loggedUser").innerText =
+                document.getElementById("loggedUsercmpltd").innerText =
                     `${user.gender == 'male' ? 'Mr.' : 'Ms.'} ${user.fname} ${user.lname}`;
             }
         }
