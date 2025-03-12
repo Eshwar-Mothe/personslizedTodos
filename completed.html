@@ -228,6 +228,25 @@
         }
 
         document.addEventListener("DOMContentLoaded", displayCompletedTodos())
+
+        function handleLogout(event) {
+            event.stopPropagation(); // Prevent closing the tooltip when clicking logout
+            localStorage.removeItem("loggedInUser"); // Remove user from localStorage
+            window.location.href = "index.html"; // Redirect to home page
+        }
+
+        // Load user details from localStorage
+        function loadUserDetails() {
+            const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (user) {
+                console.log(user);
+                document.getElementById("loggedUser").innerText =
+                    `${user.gender == 'male' ? 'Mr.' : 'Ms.'} ${user.fname} ${user.lname}`;
+            }
+        }
+
+        loadUserDetails();
     </script>
     <script src="todo.js"></script>
     <script src="script.js"></script>
