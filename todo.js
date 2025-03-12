@@ -1,4 +1,39 @@
 
+// New Todo Operations
+
+// function datachecker() {
+//     const title = document.getElementById('title').value;
+//     const body = document.getElementById('content').value;
+//     const tags = document.getElementById('tags').value
+
+//     if (!tags || !body || !title) {
+//         alert("Please fill out the data")
+//     }
+//     else {
+//         console.log(title, body, tags);
+//     }
+// }
+
+// const totdoContainer = document.getElementsByClassName('newTodoContainer')[0]
+// totdoContainer.style.display = 'none';
+
+// const submitNewTodo = document.getElementById('newTodo')
+
+// submitNewTodo.addEventListener('click', () => {
+//     datachecker();
+// })
+
+
+// document.getElementById('newTodo').addEventListener('click', () => {
+//     const title = document.getElementById('title').value.trim()
+//     const content = document.getElementById('content').value.trim()
+//     const tag = document.getElementById('tags').value
+
+
+//     const todoObject = { title, content, tag, createdAt: new Date().toString() }
+//     console.log(todoObject)
+
+// })
 
 function handleReset() {
     document.getElementById('title').value = ''
@@ -10,37 +45,44 @@ function handleSubmitTodo() {
     const content = document.getElementById('content').value.trim()
     const tag = document.getElementById('tags').value
 
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
-
-    const todoId = savedTodos.length > 0 ? savedTodos.length + 1 : 1;
-
-    const Time = new Date()
-    const date = Time.getDate()
-    const month = Time.getMonth()
-    const year = Time.getFullYear()
-
-    const timeStamp = `${(date).toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`
-    console.log(timeStamp)
-
-    const todosData = {
-        id: todoId,
-        title: title,
-        content: content,
-        tag: tag,
-        createdAt: timeStamp,
-        uid: loggedInUser.uid
+    if (!(title) || !(content) || !(tag)) {
+        alert("Please fill all the fields")
+        return
     }
+    else {
 
-    savedTodos.push(todosData);
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
-    localStorage.setItem('todos', JSON.stringify(savedTodos))
-    alert('Todo Saved Successfully')
-    handleReset()
-    displayTodos();
-    updateTodoStats();
+        const todoId = savedTodos.length > 0 ? savedTodos.length + 1 : 1;
 
+        const Time = new Date()
+        const date = Time.getDate()
+        const month = Time.getMonth()
+        const year = Time.getFullYear()
+
+        const timeStamp = `${(date).toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`
+        console.log(timeStamp)
+
+        const todosData = {
+            id: todoId,
+            title: title,
+            content: content,
+            tag: tag,
+            createdAt: timeStamp,
+            uid: loggedInUser.uid
+        }
+
+        savedTodos.push(todosData);
+
+        localStorage.setItem('todos', JSON.stringify(savedTodos))
+        alert('Todo Saved Successfully')
+        handleReset()
+        displayTodos();
+        updateTodoStats();
+    }
 }
+
 
 function updateTodoStats() {
     const todosData = JSON.parse(localStorage.getItem("todos")) || [];
@@ -94,7 +136,7 @@ function displayTodos() {
 
     const todos = todosData.filter(todo => todo.uid === loggedInUser.uid);
 
-    todoTableBody.innerHTML = ""; 
+    todoTableBody.innerHTML = "";
 
     if (todos.length > 0) {
 
@@ -132,7 +174,7 @@ function displayTodos() {
 function openModal(todoId) {
     const todos = JSON.parse(localStorage.getItem("todos")) || [];
     const todo = todos.find(t => t.id === todoId);
-    
+
     if (!todo) return;
 
     document.getElementById("modalTitle").innerText = todo.isFavorite ? `⭐ ${todo.title}` : todo.title;
@@ -160,8 +202,8 @@ function handleComplete() {
 
         const todoIndex = todos.findIndex(t => t.id === currentTodoId);
         if (todoIndex !== -1) {
-            completedTodos.push(todos[todoIndex]); 
-            todos.splice(todoIndex, 1); 
+            completedTodos.push(todos[todoIndex]);
+            todos.splice(todoIndex, 1);
 
             localStorage.setItem("todos", JSON.stringify(todos));
             localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
@@ -183,7 +225,7 @@ function handleFav() {
 
         const todo = todos.find(t => t.id === currentTodoId);
         if (todo) {
-            todo.isFavorite = !todo.isFavorite; 
+            todo.isFavorite = !todo.isFavorite;
 
             localStorage.setItem("todos", JSON.stringify(todos));
             alert(todo.isFavorite ? "Added to Favorites!" : "Removed from Favorites!");
@@ -274,3 +316,4 @@ function setUserAvatar() {
 }
 
 document.addEventListener("DOMContentLoaded", setUserAvatar());
+document.addEventListener("DOMContentLoaded", handleReset());
