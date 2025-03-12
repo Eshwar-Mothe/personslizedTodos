@@ -26,7 +26,7 @@ body {
     --paddingInline: 2rem;
     --buttonColor: rgb(196, 199, 169);
     --borderRadius: 10px;
-    --bodyBackgroundColor: linear-gradient(95deg, #3a1c71, #d76d77, #ffaf7b);
+    --bodyBackgroundColor: white;
 }
 
 /* navbar Styling */
