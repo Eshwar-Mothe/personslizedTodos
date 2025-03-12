@@ -115,6 +115,9 @@
 
     <script>
 
+        document.addEventListener("DOMContentLoaded", setUserAvatar());
+        document.addEventListener("DOMContentLoaded", loadUserDetails());
+
         function displayCompletedTodos() {
             console.log('triggering')
             const completedTodoTable = document.getElementById("completedTodoTableBody");
@@ -238,7 +241,7 @@
         // Load user details from localStorage
         function loadUserDetails() {
             const user = JSON.parse(localStorage.getItem("loggedInUser"));
-            triggering
+            console.log('triggering')
             if (user) {
                 console.log(user);
                 document.getElementById("loggedUsercmpltd").innerText =
@@ -246,28 +249,30 @@
             }
         }
 
-        loadUserDetails();
+
 
         function setUserAvatar() {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
-    const avatarImg = document.getElementById("userAvatar");
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
+            const avatarImg = document.getElementById("userAvatar");
 
-    if (!loggedInUser) {
-        console.warn("No user is logged in! Cannot set avatar.");
-        return;
-    }
+            console.log(loggedInUser)
+            if (!loggedInUser) {
+                console.warn("No user is logged in! Cannot set avatar.");
+                return;
+            }
 
 
-    if (loggedInUser.gender === "male") {
-        avatarImg.src = "male.png";
-    } else if (loggedInUser.gender === "female") {
-        avatarImg.src = "female.png";
-    } else {
-        avatarImg.src = "default.webp"
-    }
-}
+            if (loggedInUser.gender === "male") {
+                console.log(loggedInUser)
+                avatarImg.src = "male.png";
+            } else if (loggedInUser.gender === "female") {
+                avatarImg.src = "female.png";
+            } else {
+                avatarImg.src = "default.webp"
+            }
+        }
 
-document.addEventListener("DOMContentLoaded", setUserAvatar());
+
     </script>
     <script src="todo.js"></script>
     <script src="script.js"></script>
