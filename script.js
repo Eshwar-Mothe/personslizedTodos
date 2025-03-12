@@ -6,7 +6,7 @@ const signUpButtons = document.querySelectorAll('.signup')
 
 console.log(loginButtons, signUpButtons)
 
-const baseUrl = 'http://127.0.0.1:5501/'
+const baseUrl = 'https://eshwar-mothe.github.io/personslizedTodos/'
 
 // Homepage Navigation
 homeButton.style.cursor = 'pointer'
@@ -41,11 +41,13 @@ otpButton.addEventListener("click", (e) => {
     userDataStoring();
 });
 
+// Checking for the existing user
 function existingUser() {
     let users = JSON.parse(localStorage.getItem("users") || "[]");
     return users.map((user) => user.userMail);
 }
 
+// Storing the data into the localstorage
 function userDataStoring() {
     let users = JSON.parse(localStorage.getItem("users") || "[]");
 
@@ -78,7 +80,7 @@ function userDataStoring() {
         return;
     }
 
-    const newOTP = generateOTP();
+    const newOTP = generateOTP();// generates the six digits OTP
 
     const userDetails = {
         uid: Date.now(), 
@@ -137,7 +139,7 @@ function handleOtpSubmission() {
     }
 }
 
-
+// handles the login of the user
 function handleLogin() {
 
     console.log('triggering')
@@ -167,6 +169,7 @@ function handleLogin() {
     }
 }
 
+// Getting the timestamp to assign as UID to the user
 function timeStamp() {
     const date = new Date()
 
@@ -182,45 +185,8 @@ function timeStamp() {
     return timeStamp
 }
 
-// New Todo Operations
-
-function datachecker() {
-    const title = document.getElementById('title').value;
-    const body = document.getElementById('content').value;
-    const tags = document.getElementById('tags').value
-
-    if (!tags || !body || !title) {
-        alert("Please fill out the data")
-    }
-    else {
-        console.log(title, body, tags);
-    }
-}
-
-const totdoContainer = document.getElementsByClassName('newTodoContainer')[0]
-totdoContainer.style.display = 'none';
-
-const submitNewTodo = document.getElementById('newTodo')
-
-submitNewTodo.addEventListener('click', () => {
-    datachecker();
-})
 
 
-document.getElementById('newTodo').addEventListener('click', () => {
-    const title = document.getElementById('title').value.trim()
-    const content = document.getElementById('content').value.trim()
-    const tag = document.getElementById('tags').value
-
-    if (!(title) || !(content) || !(tag)) {
-        alert("Please fill all the fields")
-        return
-    }
-
-    const todoObject = { title, content, tag, createdAt: new Date().toString() }
-    console.log(todoObject)
-
-})
 
 
 // 
