@@ -26,7 +26,8 @@ body {
     --paddingInline: 2rem;
     --buttonColor: rgb(196, 199, 169);
     --borderRadius: 10px;
-    --bodyBackgroundColor: white;
+    --bodyBackgroundColor: rgb(19, 5, 42);
+    --default-text-color:#180a31;
 }
 
 /* navbar Styling */
@@ -36,13 +37,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding-inline: var(--paddingInline);
-    /* need to adjust in responsive */
     padding-block: var(--paddingBlock);
-    /* need to adjust in responsive */
     border-width: var(--borderWidth);
     border-style: var(--borderStyle);
     border-color: var(--borderColor);
-    background: rgb(35, 46, 68) !important;
+    background: #13052aff !important;
 }
 
 .logo {
@@ -87,7 +86,7 @@ body {
   .tooltip-box {
       display: none;
       position: absolute;
-    transform: translateX(-55%);
+    transform: translateX(-70%);
     background: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     padding: 1rem;
@@ -95,7 +94,7 @@ body {
     text-wrap: nowrap;
     text-align: center;
     z-index: 1000;
-    color: #180a31;
+    color: var(--default-text-color);
     font-weight: 500;
     /* padding-inline-start: 2rem; */
   }
@@ -135,7 +134,7 @@ body {
 
 
 .contentSection p {
-    color: var(--buttonColor);
+    color: var(--default-text-color) !important;
 }
 
 .contentSection ul {
@@ -147,13 +146,13 @@ body {
 }
 
 .contentSection ul li {
-    color: rgb(59, 41, 41);
+    color: rgb(105, 97, 97);
     cursor: var(--cursorStyle);
-    background-color: rgba(255, 255, 255, 0.425);
+    background-color: var(--default-text-color);
     padding-inline: var(--paddingInline);
     padding-block: var(--paddingBlock);
     border-radius: var(--borderRadius);
-    font-size: 1.5rem;
+    font-size: 1rem;
 
     &:hover {
         color: white;
@@ -207,7 +206,7 @@ body {
 #tagLine {
     text-align: center;
     padding-block: var(--paddingBlock);
-    color: white;
+    color: var(--default-text-color);
 }
 
 .signup-container {
@@ -227,7 +226,6 @@ body {
     display: flex;
     flex-direction: column;
     align-self: center;
-
 }
 
 .signup-container form .nameSection,
@@ -245,14 +243,15 @@ select {
     padding-block: var(--paddingBlock);
     padding-inline: .5rem;
     background: transparent;
-    border: 2px solid #6e6e6e;
+    border: 2px solid #393939;
     margin-block-end: 1rem;
-    color: white;
+    color: var(--default-text-color);
 }
 
 .signup-container {
-    background: rgba(0, 0, 0, 0.377);
-    color: white;
+    background: #ffffff4a;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.7);
+    color: var(--default-text-color);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -278,7 +277,7 @@ form #getOtp,
 form select {
     width: 100%;
     padding-block: var(--paddingBlock);
-    color: white;
+    color: var(--default-text-color);
 }
 
 form select option {
@@ -289,7 +288,8 @@ form select option {
 /* OTP Box Stylings */
 
 #otpBox {
-    border: 2px solid white;
+    border: 2px solid var(--default-text-color);
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.7);
     width: 50%;
     padding-inline: var(--paddingInline);
     padding-block: var(--paddingBlock);
@@ -307,6 +307,7 @@ form select option {
     padding-inline: .2rem;
     width: 50%;
     margin-block-end: .5rem;
+    text-align: center;
     border-radius: var(--borderRadius);
     border-style: none;
 }
@@ -321,6 +322,7 @@ form select option {
 /* LogIn Page Styles */
 
 .heading {
+    color: var(--default-text-color);
     text-align: center;
     margin-inline: var(--paddingInline);
     margin-block: var(--paddingBlock);
@@ -356,7 +358,7 @@ form select option {
 }
 
 .loginContainer label {
-    color: rgb(241, 232, 146);
+    color: var(--default-text-color);
     font-weight: 700;
     font-size: 1rem;
 }
@@ -365,17 +367,17 @@ form select option {
 
     text-align: center !important;
     background: transparent;
-    color: rgb(241, 232, 146);
+    color: var(--default-text-color);
     font-weight: 700;
 }
 
 .loginContainer h2 {
-    color: rgb(241, 232, 146);
+    color: var(--default-text-color);
 }
 
 /* New Todo Container */
 .newTodoContainer {
-    border: 2px solid white;
+    border: 2px solid var(--default-text-color);
     border-radius: 10px;
     width: 60%;
     margin: auto;
@@ -386,7 +388,7 @@ form select option {
     gap: .5rem;
     justify-content: space-around;
     align-items: stretch;
-    color: white !important;
+    color: var(--default-text-color) !important;
 }
 
 .newTodoContainer input {
@@ -435,16 +437,17 @@ form select option {
 }
 
 .existingTodos .header h3 {
+    font-size: 1rem;
     font-weight: 500;
-    color: #ffffff;
+    color: var(--default-text-color);
 }
 
 .detailsSection h3 {
-    color: #000000 !important;
+    color: var(--default-text-color) !important;
 }
 
 .existingTodos .header span {
-    color: white;
+    color: var(--default-text-color);
     font-weight: 500;
 }
 
@@ -452,7 +455,7 @@ form select option {
     margin: auto;
     margin-block-start: 2rem;
     width: 100% !important;
-    border: 2px solid white;
+    border: 2px solid var(--default-text-color);
     height: 70vh;
     border-radius: 10px;
 }
@@ -460,10 +463,11 @@ form select option {
 .existingTodos .mainSection h2 {
     text-align: center;
     padding-block: .5rem;
+    color: white !important;
     background-color: #180a31;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border: 2px solid white;
+    border: 2px solid var(--borderColor);
     border-style: none none solid none;
     width: 100% !important;
 }
@@ -497,7 +501,7 @@ form select option {
 
 .todoContainer table td {
     padding: .5rem;
-    border: 1px solid rgb(255, 255, 255);
+    border: 2px solid gray;
     border-style: solid none solid none;
 }
 
@@ -507,13 +511,14 @@ form select option {
 }
 
 .todoContainer table thead tr th {
+    /* color: var(--default-text-color); */
     color: white;
     padding-block: .5rem;
 }
 
 .todoContainer table tbody tr td {
     text-align: center;
-    color: white;
+    color: var(--default-text-color);
     font-size: 1rem;
 }
 
@@ -521,10 +526,10 @@ form select option {
     border: none;
     padding: .5rem 1rem;
     border-radius: 10px;
-    color: white;
+    color: var(--default-text-color);
     font-weight: 600;
     cursor: pointer;
-    background-color: rgba(41, 8, 8, 0.164);
+    background-color: #2928282a;
 }
 
 
@@ -603,18 +608,18 @@ form select option {
     padding-inline: 2rem;
     padding-block-start: 2rem;
     text-align: center;
-    color: white;
-    font-size: 1.5rem;
+    color: var(--default-text-color);
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .filterContainer #filterSelect {
     width: 20%;
-    color: white;
+    color: var(--default-text-color);
 }
 
 .filterContainer #filterSelect option {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 
