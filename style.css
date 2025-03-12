@@ -197,6 +197,9 @@ body {
         width: auto !important;
         flex-direction: column;
     }
+    .tooltip-box {
+    transform: translateX(0%);
+    }
 }
 
 
