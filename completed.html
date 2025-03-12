@@ -30,6 +30,17 @@
                 <li class="nav-item"><a class="nav-link" href="completed.html">Completed</a></li>
                 <li class="nav-item"><a class="nav-link" href="pending.html">Pending</a></li>
                 <li class="nav-item"><a class="nav-link" href="fav.html">Favorites</a></li>
+                <li class="nav-item">
+                    <div class="avatar-container" onclick="toggleTooltip()">
+                        <img id="userAvatar" class="avatar" src="todo.png" alt="User Avatar">
+                        <div id="tooltipBox" class="tooltip-box">
+                            <p id="loggedUser"></p>
+                            <div class="logout-btn" onclick="handleLogout(event)">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -41,7 +52,7 @@
                 <h3>Name: <span id="userName"></span></h3>
             </div>
             <div class="detailsSection text-center">
-                <h3>Total Todos: <span id="totalTodos">0</span></h3>
+                <h3>Complted Todos: <span id="completedTodos">0</span></h3>
                 <h3>Favs: <span id="favTodos">0</span></h3>
                 <h3>Pending: <span id="pendingTodos">0</span></h3>
             </div>
@@ -76,7 +87,7 @@
                         </tr>
                     </thead>
 
-                    <tbody id="todoTableBody">
+                    <tbody id="completedTodoTableBody">
 
                     </tbody>
                 </table>
@@ -94,7 +105,6 @@
                     <div class="modal-buttons">
                         <button onclick="handleComplete()" id="completeBtn" class="btn complete">Completed</button>
                         <button onclick="handleFav()" id="favBtn" class="btn favorite">Favorite</button>
-                        <button onclick="handlePin()" id="pinBtn" class="btn pin">Pin</button>
                         <button onclick="handleDelete()" id="deleteBtn" class="btn delete">Delete</button>
                     </div>
                 </div>
@@ -104,16 +114,37 @@
 
 
     <script>
-        function displayTodos() {
-            const todoTableBody = document.getElementById("todoTableBody");
-            const completedTodoBody = document.getElementById("completedTodoBody"); // New section
-            const todos = JSON.parse(localStorage.getItem("completedTodos")) || [];
 
-            todoTableBody.innerHTML = ""; // Clear existing data
-            completedTodoBody.innerHTML = "";
+        function displayCompletedTodos() {
+            console.log('triggering')
+            const completedTodoTableBody = document.getElementById("completedTodoTableBody");
+            const todosData = JSON.parse(localStorage.getItem("completedTodos")) || [];
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
-            if (todos.length > 0) {
-                todos.forEach((todo, index) => {
+
+            if (!loggedInUser) {
+                console.warn("No user is logged in! Cannot display todos.");
+                return;
+            }
+
+            console.log(todosData)
+
+            const userTodos = todosData.filter(todo => todo.uid === loggedInUser.uid);
+
+            document.getElementById('completedTodos').innerHTML = userTodos.length
+
+            const completedTodos = userTodos;
+            console.log(completedTodos)
+
+            completedTodoTableBody.innerHTML = "";
+
+            console.log(completedTodos.length)
+
+            // Display completed todos
+            if (completedTodos.length > 0) {
+                console.log('triggered')
+                completedTodos.forEach((todo, index) => {
+                    console.log(todo)
                     const row = document.createElement("tr");
 
                     row.innerHTML = `
@@ -121,17 +152,23 @@
                 <td>${todo.isFavorite ? `⭐ ${todo.title}` : todo.title}</td>
                 <td>${todo.content.substring(0, 10)}...</td>
                 <td>${todo.tag}</td>
-                <td><button onclick="openModal(${todo.id})">View More</button></td>
+                <td>${todo.createdAt}</td>
+                <td><button id='viewTodo' onclick="openCompletedTodoModal(${todo.uid})">View More</button></td>
             `;
-                    completedTodoBody.appendChild(row);
 
-                })
-
-
-                updateTodoStats()
+                    completedTodoTableBody.appendChild(row);
+                });
             } else {
-                todoTableBody.innerHTML = "<tr><td colspan='5'><img src='todo.png' alt='No Data'></td></tr>";
+                completedTodoTableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="text-align:center; padding:20px;">
+                        <img src="todo.png" alt="No Completed Todos" style="width:200px; display:block; margin:auto;">
+                        <p style="color:white; font-size:1.5rem;font-weight:500; margin-top:10px;">No Completed Todos</p>
+                    </td>
+                </tr>`;
             }
+
+            // updateTodoStats(); // Update stats after rendering
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -150,6 +187,44 @@
                 }
             }
         });
+
+        function openCompletedTodoModal(todoId) {
+            const completedTodos = JSON.parse(localStorage.getItem('completedTodos')) || [];
+            const todo = completedTodos.find(t => t.uid === todoId);
+            console.log('todo', todo)
+
+            if (!todo) {
+                alert("Todo not found!");
+                return;
+            }
+
+            // Populate modal with completed todo details
+            document.getElementById("modalTitle").innerText = todo.isFavorite ? `⭐ ${todo.title}` : todo.title;
+            document.getElementById("modalContent").innerText = todo.content;
+            document.getElementById("modalTag").innerText = todo.tag;
+            document.getElementById("modalDate").innerText = todo.createdAt;
+
+            // Disable actions for completed todos
+            document.getElementById("completeBtn").style.display = "none";
+            document.getElementById("favBtn").disabled = true;
+            document.getElementById("deleteBtn").disabled = false; // Allow delete action
+
+            currentTodoId = todoId;
+            document.getElementById("todoModal").style.display = "block";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("todoModal").style.display = "none";
+
+            // Re-enable buttons after closing modal
+            document.getElementById("favBtn").disabled = false;
+            document.getElementById("pinBtn").disabled = false;
+            document.getElementById("completeBtn").style.display = "inline-block";
+        }
+
+
+        document.addEventListener("DOMContentLoaded", displayCompletedTodos())
     </script>
     <script src="todo.js"></script>
 

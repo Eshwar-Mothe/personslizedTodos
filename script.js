@@ -6,7 +6,7 @@ const signUpButtons = document.querySelectorAll('.signup')
 
 console.log(loginButtons, signUpButtons)
 
-const baseUrl = 'https://eshwar-mothe.github.io/personslizedTodos/'
+const baseUrl = 'http://127.0.0.1:5501/'
 
 // Homepage Navigation
 homeButton.style.cursor = 'pointer'
@@ -34,99 +34,104 @@ signUpButtons.forEach((button) => {
 
 //Signup Page Operations
 
-const otpButton = document.getElementById('getOtp')
+const otpButton = document.getElementById("getOtp");
 
-otpButton.addEventListener('click', (e) => {
+otpButton.addEventListener("click", (e) => {
     e.preventDefault();
     userDataStoring();
-}
-);
+});
 
 function existingUser() {
-    let users = JSON.parse(localStorage.getItem('users') || "[]");
-    return users.map(user => user.userMail);
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
+    return users.map((user) => user.userMail);
 }
 
 function userDataStoring() {
-    var users = JSON.parse(localStorage.getItem('users') || "[]");
+    let users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    const firstName = document.getElementById('fname').value.trim();
-    const lastName = document.getElementById('lname').value.trim();
-    const email = document.getElementById('email').value.trim().toLowerCase();
-    const password = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('cpassword').value.trim();
-    const mobileNumber = document.getElementById('mobile').value.trim();
-    const gender = document.getElementById('gender').value.trim();
+    const firstName = document.getElementById("fname").value.trim();
+    const lastName = document.getElementById("lname").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("cpassword").value.trim();
+    const mobileNumber = document.getElementById("mobile").value.trim();
+    const gender = document.getElementById("gender").value.trim().toLowerCase();
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !mobileNumber || !gender) {
+        alert("All fields are required.");
+        return;
+    }
 
     if (existingUser().includes(email)) {
-        alert("user Email already exists, moving to LogIn page")
-        location.href = `${baseUrl}login.html`
+        alert("User email already exists, redirecting to Login page.");
+        location.href = `${baseUrl}login.html`;
+        return;
     }
 
-    else {
-
-        if (!firstName || !lastName || !email || !password || !confirmPassword || !mobileNumber || !gender) {
-            alert("All fields are required.");
-            return;
-        }
-
-        // Check if passwords match
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return;
-        }
-
-        // Check password length
-        if (password.length < 6) {
-            alert("Password must be at least 6 characters long.");
-            return;
-        }
-
-        const userDetails = {
-            uid: timeStamp(),
-            fname: firstName,
-            lname: lastName,
-            userMail: email,
-            password: password,
-            mobile: mobileNumber,
-            gender: gender,
-        };
-
-        users.push(userDetails);
-        localStorage.setItem("users", JSON.stringify(users));
-
-        console.log("User registered:", userDetails);
-
-        // Show OTP box and hide signup container
-        document.getElementById("otpBox").style.display = 'block';
-        document.getElementById('signUpContainer').style.display = 'none';
-        document.getElementById('UserMail').innerHTML = userDetails.userMail
-
-        generateOTP()
-        localStorage.setItem("loggedInUser", JSON.stringify(users));
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
     }
+
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return;
+    }
+
+    const newOTP = generateOTP();
+
+    const userDetails = {
+        uid: Date.now(), 
+        fname: firstName,
+        lname: lastName,
+        userMail: email,
+        password: password,
+        mobile: mobileNumber,
+        gender: gender,
+        otp: newOTP, 
+    };
+
+
+    document.getElementById("otpBox").style.display = "block";
+    document.getElementById("signUpContainer").style.display = "none";
+    document.getElementById("UserMail").innerHTML = email;
+
+    sessionStorage.setItem("tempUser", JSON.stringify(userDetails));
 }
 
+// Function to generate OTP
 function generateOTP() {
-    const OTP = Math.floor(100000 + Math.random() * 900000); // Ensures 6-digit OTP
-    localStorage.setItem("otp", OTP); // Store OTP in localStorage
+    const OTP = Math.floor(100000 + Math.random() * 900000);
     console.log("Generated OTP:", OTP);
     alert("Your OTP is: " + OTP);
-
+    return OTP;
 }
 
-document.getElementById('otpSubmit').addEventListener("click", (e) => {
-    e.preventDefault()
-    handleOtpSubmission()
-})
+// OTP Submission Handler
+document.getElementById("otpSubmit").addEventListener("click", (e) => {
+    e.preventDefault();
+    handleOtpSubmission();
+});
 
 function handleOtpSubmission() {
-    const enteredOTP = document.getElementById('otp').value;
-    const storedOTP = localStorage.getItem("otp");
+    const enteredOTP = document.getElementById("otp").value;
+    const tempUser = JSON.parse(sessionStorage.getItem("tempUser"));
 
-    if (parseInt(enteredOTP) === parseInt(storedOTP)) {
-        alert("Registration Successful! Moving to To-Do Home.");
-        location.href = `${baseUrl}todo.html`;
+    if (!tempUser) {
+        alert("Session expired. Please register again.");
+        location.href = `${baseUrl}signup.html`;
+        return;
+    }
+
+    if (parseInt(enteredOTP) === tempUser.otp) {
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        delete tempUser.otp; 
+        users.push(tempUser);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Registration Successful! Login with your details");
+        sessionStorage.removeItem("tempUser"); 
+        location.href = `${baseUrl}login.html`;
     } else {
         alert("OTP does not match. Please try again.");
     }
@@ -206,7 +211,6 @@ document.getElementById('newTodo').addEventListener('click', () => {
     const title = document.getElementById('title').value.trim()
     const content = document.getElementById('content').value.trim()
     const tag = document.getElementById('tags').value
-
 
     if (!(title) || !(content) || !(tag)) {
         alert("Please fill all the fields")

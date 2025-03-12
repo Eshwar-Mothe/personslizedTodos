@@ -1,4 +1,4 @@
-// Handling the Submit and reset
+
 
 function handleReset() {
     document.getElementById('title').value = ''
@@ -42,29 +42,42 @@ function handleSubmitTodo() {
 
 }
 
-// Updating the TodoStats
 function updateTodoStats() {
-    const todos = JSON.parse(localStorage.getItem("todos")) || [];
-    const favs = todos.filter(todo => todo.isFavorite).length;
-    const pending = todos.filter(todo => !todo.isCompleted).length;
+    const todosData = JSON.parse(localStorage.getItem("todos")) || [];
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
 
-    document.getElementById("totalTodos").innerText = todos.length;
+    // Ensure a user is logged in
+    if (!loggedInUser) {
+        console.warn("No user is logged in! Cannot update stats.");
+        return;
+    }
+
+    // Filter todos based on the logged-in user
+    const userTodos = todosData.filter(todo => todo.uid === loggedInUser.uid);
+
+
+    const favs = userTodos.filter(todo => todo.isFavorite).length;
+    const pending = userTodos.filter(todo => !todo.isCompleted).length;
+
+    // Update UI elements
+    document.getElementById("totalTodos").innerText = userTodos.length;
     document.getElementById("favTodos").innerText = favs;
     document.getElementById("pendingTodos").innerText = pending;
-
+    document.getElementById('completedTodos').innerHTML = completedTodos.length
 }
 
-// Run this function when the page loads
+
+
 document.addEventListener("DOMContentLoaded", updateTodoStats);
 
 
-// Displaying the Todos of the user
-
 document.addEventListener("DOMContentLoaded", function () {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    console.log(loggedInUser.fname)
 
     const loggedInUserName = `${loggedInUser.fname} ${loggedInUser.lname}`
     document.getElementById('userName').innerHTML = loggedInUserName
+    console.log(loggedInUserName)
 
     displayTodos();
     updateTodoStats();
@@ -76,9 +89,12 @@ let currentTodoId = null;
 
 function displayTodos() {
     const todoTableBody = document.getElementById("todoTableBody");
-    const todos = JSON.parse(localStorage.getItem("todos")) || [];
+    const todosData = JSON.parse(localStorage.getItem("todos")) || [];
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
 
-    todoTableBody.innerHTML = ""; // Clear existing data
+    const todos = todosData.filter(todo => todo.uid === loggedInUser.uid);
+
+    todoTableBody.innerHTML = ""; 
 
     if (todos.length > 0) {
 
@@ -113,13 +129,12 @@ function displayTodos() {
 
 }
 
-// Function to open modal
 function openModal(todoId) {
     const todos = JSON.parse(localStorage.getItem("todos")) || [];
     const todo = todos.find(t => t.id === todoId);
+    
     if (!todo) return;
 
-    // Set modal data
     document.getElementById("modalTitle").innerText = todo.isFavorite ? `⭐ ${todo.title}` : todo.title;
     document.getElementById("modalContent").innerText = todo.content;
     document.getElementById("modalTag").innerText = todo.tag;
@@ -131,12 +146,13 @@ function openModal(todoId) {
     document.getElementById("todoModal").style.display = "block";
 }
 
+
 function closeModal() {
     document.getElementById("todoModal").style.display = "none";
     currentTodoId = null;
 }
 
-// ✅ Move todo to completed list
+
 function handleComplete() {
     if (currentTodoId !== null) {
         let todos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -144,8 +160,8 @@ function handleComplete() {
 
         const todoIndex = todos.findIndex(t => t.id === currentTodoId);
         if (todoIndex !== -1) {
-            completedTodos.push(todos[todoIndex]); // Move to completed list
-            todos.splice(todoIndex, 1); // Remove from original list
+            completedTodos.push(todos[todoIndex]); 
+            todos.splice(todoIndex, 1); 
 
             localStorage.setItem("todos", JSON.stringify(todos));
             localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
@@ -161,14 +177,13 @@ function handleComplete() {
     }
 }
 
-// ✅ Toggle Favorite
 function handleFav() {
     if (currentTodoId !== null) {
         let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
         const todo = todos.find(t => t.id === currentTodoId);
         if (todo) {
-            todo.isFavorite = !todo.isFavorite; // Toggle favorite
+            todo.isFavorite = !todo.isFavorite; 
 
             localStorage.setItem("todos", JSON.stringify(todos));
             alert(todo.isFavorite ? "Added to Favorites!" : "Removed from Favorites!");
@@ -180,28 +195,7 @@ function handleFav() {
     }
 }
 
-// ✅ Pin todo to top
-function handlePin() {
-    if (currentTodoId !== null) {
-        let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-        const todoIndex = todos.findIndex(t => t.id === currentTodoId);
-        if (todoIndex !== -1) {
-            const [pinnedTodo] = todos.splice(todoIndex, 1);
-            todos.unshift(pinnedTodo); // Move to the top of the list
-
-            localStorage.setItem("todos", JSON.stringify(todos));
-            alert("Todo Pinned!");
-            closeModal();
-            displayTodos();
-            updateTodoStats();
-            // document.addEventListener("DOMContentLoaded", displayTodos);
-
-        }
-    }
-}
-
-// ✅ Delete todo
 function handleDelete() {
     if (currentTodoId !== null) {
         let todos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -218,6 +212,7 @@ function handleDelete() {
 }
 
 
+
 function filterTodos() {
     const filterValue = document.getElementById("filterSelect").value;
     let todos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -231,8 +226,6 @@ function filterTodos() {
         filteredTodos = completedTodos;
     } else if (filterValue === "favorite") {
         filteredTodos = todos.filter(todo => todo.isFavorite);
-    } else if (filterValue === "pinned") {
-        filteredTodos = [todos.find(todo => todo.isPinned)].filter(Boolean); // Get only pinned todo
     } else {
         filteredTodos = todos.filter(todo => todo.tag.toLowerCase() === filterValue);
     }
@@ -242,7 +235,7 @@ function filterTodos() {
 
 function updateTodoTable(filteredTodos) {
     const todoTableBody = document.getElementById("todoTableBody");
-    todoTableBody.innerHTML = ""; // Clear table
+    todoTableBody.innerHTML = "";
 
     filteredTodos.forEach((todo, index) => {
         const row = document.createElement("tr");
@@ -257,5 +250,27 @@ function updateTodoTable(filteredTodos) {
     });
 }
 
-// Call displayTodos initially to show all todos
 displayTodos();
+
+
+// Set Avatar
+function setUserAvatar() {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
+    const avatarImg = document.getElementById("userAvatar");
+
+    if (!loggedInUser) {
+        console.warn("No user is logged in! Cannot set avatar.");
+        return;
+    }
+
+
+    if (loggedInUser.gender === "male") {
+        avatarImg.src = "male.png";
+    } else if (loggedInUser.gender === "female") {
+        avatarImg.src = "female.png";
+    } else {
+        avatarImg.src = "default.webp"
+    }
+}
+
+document.addEventListener("DOMContentLoaded", setUserAvatar());

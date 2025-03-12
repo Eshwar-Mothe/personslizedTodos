@@ -1,23 +1,24 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body{
+body {
     background: var(--bodyBackgroundColor) no-repeat center center / cover;
     min-height: 100vh;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     display: none;
 }
-:root{
+
+:root {
     --buttonHover: #d76d77;
     --cursorStyle: pointer;
     --borderWidth: 2px;
-    --borderColor:#ffaf7b;
+    --borderColor: #ffaf7b;
     --borderStyle: none none solid none;
     --headingFont: 2rem;
     --subHeadingFont: .5rem;
@@ -30,42 +31,93 @@ body{
 
 /* navbar Styling */
 
-.navbar{
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-inline: var(--paddingInline); /* need to adjust in responsive */
-    padding-block: var(--paddingBlock); /* need to adjust in responsive */
+    padding-inline: var(--paddingInline);
+    /* need to adjust in responsive */
+    padding-block: var(--paddingBlock);
+    /* need to adjust in responsive */
     border-width: var(--borderWidth);
-    border-style:var(--borderStyle);
-    border-color:var(--borderColor);
+    border-style: var(--borderStyle);
+    border-color: var(--borderColor);
     background: rgb(35, 46, 68) !important;
 }
 
-.logo{
+.logo {
     color: white;
 }
-#logo span{
+
+#logo span {
     color: var(--borderColor);
 }
 
-.nav-links ul{
+.nav-links ul {
     list-style: none;
 }
 
-.nav-links ul li ,.nav-links ul li a{
+.nav-links ul li,
+.nav-links ul li a {
     text-decoration: none;
     color: var(--borderColor);
     padding: .5rem 1rem;
     border-radius: var(--borderRadius);
-    &:hover{
+
+    &:hover {
         color: var(--buttonHover);
         transition: .5s;
         cursor: var(--cursorStyle);
-    } 
+    }
 }
 
-.heroSection{
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .tooltip-box {
+      display: none;
+      position: absolute;
+    transform: translateX(-55%);
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 6px;
+    text-wrap: nowrap;
+    text-align: center;
+    z-index: 1000;
+    color: #180a31;
+    font-weight: 500;
+    /* padding-inline-start: 2rem; */
+  }
+
+  .tooltip-box.show {
+    display: block;
+  }
+
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+  }
+
+  .logout-btn:hover {
+    color: darkred;
+  }
+
+.heroSection {
     padding-inline: var(--paddingInline);
     padding-block: var(--paddingBlock);
     display: flex;
@@ -82,11 +134,11 @@ body{
 
 
 
-.contentSection p{
+.contentSection p {
     color: var(--buttonColor);
 }
 
-.contentSection ul{
+.contentSection ul {
     display: flex;
     list-style: none;
     gap: 2rem;
@@ -94,7 +146,7 @@ body{
     padding-block: var(--paddingBlock);
 }
 
-.contentSection ul li{
+.contentSection ul li {
     color: rgb(59, 41, 41);
     cursor: var(--cursorStyle);
     background-color: rgba(255, 255, 255, 0.425);
@@ -102,45 +154,46 @@ body{
     padding-block: var(--paddingBlock);
     border-radius: var(--borderRadius);
     font-size: 1.5rem;
-    &:hover{
+
+    &:hover {
         color: white;
     }
 }
 
-.imgSection{
+.imgSection {
     width: 80%;
 }
 
-.imgSection img{
+.imgSection img {
     width: 100%;
     object-fit: cover;
 }
 
-.smallScreens{
+.smallScreens {
     display: none;
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
     /* .container{
         display: none;
     } */
 }
 
-@media(width <= 900px){
-    .navbar{
+@media(width <=900px) {
+    .navbar {
         padding-inline: .2rem;
     }
-    
-    .heroSection{
+
+    .heroSection {
         flex-direction: column;
     }
 
-    .nav-links #buttons{
+    .nav-links #buttons {
         padding: 0;
         gap: 0;
     }
 
-    .heroSection #buttons{
+    .heroSection #buttons {
         gap: .1rem;
         width: auto !important;
         flex-direction: column;
@@ -150,26 +203,25 @@ body{
 
 /* SignUp Form Styles */
 
-#heading, #tagLine{
+#heading,
+#tagLine {
     text-align: center;
     padding-block: var(--paddingBlock);
     color: white;
 }
 
-.signup-container{
+.signup-container {
     border: 2px solid rgb(255, 255, 255);
-    border-radius:15px ;
-    box-shadow: 0 2px 10px rgb(128, 123, 123);
-    width: 50%;
+    border-radius: 15px;
     display: flex;
     margin: auto;
     align-items: center;
-    justify-content: center;
-    padding-block:var(--paddingInline);
+    justify-content: space-evenly;
+    padding-block: var(--paddingInline);
     padding-inline: var(--paddingBlock);
 }
 
-.signup-container form{
+.signup-container form {
     padding-inline: var(--paddingBlock);
     padding-inline: 2rem;
     display: flex;
@@ -180,12 +232,13 @@ body{
 
 .signup-container form .nameSection,
 .signup-container form .contactSection,
-.signup-container form .passwordSection{
+.signup-container form .passwordSection {
     display: flex;
     gap: 2rem;
 }
 
-.signup-container form input,select{
+.signup-container form input,
+select {
     width: 100%;
     border-radius: var(--borderRadius);
     border-style: none;
@@ -194,16 +247,18 @@ body{
     background: transparent;
     border: 2px solid #6e6e6e;
     margin-block-end: 1rem;
+    color: white;
 }
 
-.signup-container{
+.signup-container {
     background: rgba(0, 0, 0, 0.377);
     color: white;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(10px);
 }
 
-form #getOtp,.buttons button {
+form #getOtp,
+.buttons button {
     padding-inline: var(--paddingInline);
     padding-block: var(--paddingBlock);
     color: rgb(62, 12, 68);
@@ -212,27 +267,28 @@ form #getOtp,.buttons button {
     border: none;
     border-radius: var(--borderRadius);
     cursor: var(--cursorStyle);
+
     /* left: 50%; */
-    &:hover{
+    &:hover {
         color: #ffaf7b;
         background-color: rgb(48, 48, 48);
     }
 }
 
-form select{
+form select {
     width: 100%;
     padding-block: var(--paddingBlock);
     color: white;
 }
 
-form select option{
+form select option {
     color: #3a1c71;
 }
 
 
 /* OTP Box Stylings */
 
-#otpBox{
+#otpBox {
     border: 2px solid white;
     width: 50%;
     padding-inline: var(--paddingInline);
@@ -246,8 +302,8 @@ form select option{
     justify-content: center;
 }
 
-#otpBox form input{
-    padding-block:.5rem;
+#otpBox form input {
+    padding-block: .5rem;
     padding-inline: .2rem;
     width: 50%;
     margin-block-end: .5rem;
@@ -255,7 +311,7 @@ form select option{
     border-style: none;
 }
 
-#otpSubmit{
+#otpSubmit {
     background-color: #ffaf7b;
     font-size: 1rem;
     font-weight: bold;
@@ -264,31 +320,24 @@ form select option{
 
 /* LogIn Page Styles */
 
-.heading{
+.heading {
     text-align: center;
     margin-inline: var(--paddingInline);
     margin-block: var(--paddingBlock);
     cursor: default;
 }
 
-.loginContainer{
+.loginContainer {
     border: 2px solid white;
     padding-inline: var(--paddingInline);
     padding-block: var(--paddingBlock);
     border-radius: var(--borderRadius);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: grid;
-    justify-content: space-evenly;
-    align-items: center;
-    align-content: center;
-
+    margin: auto;
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.7);
 }
 
-.loginContainer input, #loginButton{
+.loginContainer input,
+#loginButton {
     padding-inline: var(--paddingInline);
     padding-inline-start: .5rem;
     padding-block: var(--paddingBlock);
@@ -298,31 +347,35 @@ form select option{
     border-style: solid;
     border-color: white;
     border-radius: var(--borderRadius);
+
+}
+
+#loginButton{
+    text-align: center;
+    width: 30%;
 }
 
 .loginContainer label {
     color: rgb(241, 232, 146);
     font-weight: 700;
     font-size: 1rem;
-
 }
 
-.loginContainer input[type="submit"]{
-    margin-inline:35%;
-    margin-block: var(--paddingBlock);
-    padding-inline: var(--paddingInline) !important;
+.loginContainer button {
+
+    text-align: center !important;
     background: transparent;
     color: rgb(241, 232, 146);
     font-weight: 700;
 }
 
-.loginContainer h2{
+.loginContainer h2 {
     color: rgb(241, 232, 146);
 }
 
 /* New Todo Container */
-.newTodoContainer{
-    border:2px solid white;
+.newTodoContainer {
+    border: 2px solid white;
     border-radius: 10px;
     width: 60%;
     margin: auto;
@@ -332,19 +385,20 @@ form select option{
     flex-direction: column;
     gap: .5rem;
     justify-content: space-around;
-    align-items:stretch;
+    align-items: stretch;
     color: white !important;
 }
 
-.newTodoContainer input{
+.newTodoContainer input {
     width: 50%;
     border-style: none;
     background-color: #31313171;
     padding: 1rem;
     border-radius: 5px;
+    color: white;
 }
 
-.newTodoContainer .addContent textarea{
+.newTodoContainer .addContent textarea {
     width: 80% !important;
     height: 20dvh;
     padding: .5rem;
@@ -355,21 +409,23 @@ form select option{
 
 }
 
-.newTodoContainer select{
+.newTodoContainer select {
     width: 50%;
 }
 
 
 /* Existing Todos Styles */
 
-.existingTodos{
+.existingTodos {
     padding-block-end: 1rem;
 }
-.existingTodos .header{
+
+.existingTodos .header {
     padding-block-start: 1rem;
 }
+
 .existingTodos .header,
-.existingTodos .header .detailsSection{
+.existingTodos .header .detailsSection {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -377,21 +433,22 @@ form select option{
     padding-inline: .5rem;
 
 }
-.existingTodos .header h3{
+
+.existingTodos .header h3 {
     font-weight: 500;
     color: #ffffff;
 }
 
-.detailsSection h3{
+.detailsSection h3 {
     color: #000000 !important;
 }
 
-.existingTodos .header span{
+.existingTodos .header span {
     color: white;
     font-weight: 500;
 }
 
-.existingTodos .mainSection{
+.existingTodos .mainSection {
     margin: auto;
     margin-block-start: 2rem;
     width: 100% !important;
@@ -400,10 +457,10 @@ form select option{
     border-radius: 10px;
 }
 
-.existingTodos .mainSection h2{
+.existingTodos .mainSection h2 {
     text-align: center;
     padding-block: .5rem;
-    background-color:#180a31;
+    background-color: #180a31;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 2px solid white;
@@ -414,48 +471,53 @@ form select option{
 /* main section styles */
 .mainSection {
     max-width: 100%;
-    max-height: 450px; 
-    overflow: auto; /* Enables both vertical and horizontal scrolling */
-    border: 1px solid #ddd; /* Optional border */
+    max-height: 450px;
+    overflow: auto;
+    /* Enables both vertical and horizontal scrolling */
+    border: 1px solid #ddd;
+    /* Optional border */
 }
 
 .todoContainer thead {
     position: sticky;
     top: 0;
-    background-color: white; /* Ensures it remains visible */
-    z-index: 100; /* Ensures it stays above table rows */
-    border-bottom: 2px solid black; /* Optional: Separates header */
+    background-color: white;
+    /* Ensures it remains visible */
+    z-index: 100;
+    /* Ensures it stays above table rows */
+    border-bottom: 2px solid black;
+    /* Optional: Separates header */
 }
 
 
-.todoContainer table{
+.todoContainer table {
     width: 100%;
-    border-collapse: collapse;    
+    border-collapse: collapse;
 }
 
-.todoContainer table td{
+.todoContainer table td {
     padding: .5rem;
     border: 1px solid rgb(255, 255, 255);
     border-style: solid none solid none;
 }
 
 
-.todoContainer table thead{
-    background-color:#180a31;
+.todoContainer table thead {
+    background-color: #180a31;
 }
 
-.todoContainer table thead tr th{
+.todoContainer table thead tr th {
     color: white;
-    padding-block:.5rem;
+    padding-block: .5rem;
 }
 
-.todoContainer table tbody tr td{
+.todoContainer table tbody tr td {
     text-align: center;
     color: white;
     font-size: 1rem;
 }
 
-.todoContainer table tbody #viewTodo{
+.todoContainer table tbody #viewTodo {
     border: none;
     padding: .5rem 1rem;
     border-radius: 10px;
@@ -489,7 +551,7 @@ form select option{
     position: relative;
 }
 
-.modal-content #modalTitle{
+.modal-content #modalTitle {
     color: white;
 }
 
@@ -515,15 +577,29 @@ form select option{
     font-size: 16px;
 }
 
-.complete {font-weight: 500; background: #397a39; color: white; }
-.favorite {font-weight: 500; background: #f8e05a; color: black; }
-.pin {font-weight: 500; background: rgb(77, 77, 190); color: white; }
-.delete {font-weight: 500; background: rgb(252, 0, 0); color: rgb(255, 255, 255); }
+.complete {
+    font-weight: 500 !important;
+    background: #397a39 !important;
+    color: white !important;
+}
+
+.favorite {
+    font-weight: 500 !important;
+    background: #f8e05a !important;
+    color: black !important;
+}
+
+
+.delete {
+    font-weight: 500 !important;
+    background: #fc0000 !important;
+    color: #ffffff !important;
+}
 
 
 /* filterContainer */
 
-.filterContainer{
+.filterContainer {
     padding-inline: 2rem;
     padding-block-start: 2rem;
     text-align: center;
@@ -532,11 +608,29 @@ form select option{
     font-weight: 600;
 }
 
-.filterContainer #filterSelect{
+.filterContainer #filterSelect {
     width: 20%;
     color: white;
 }
 
-.filterContainer #filterSelect option{
+.filterContainer #filterSelect option {
     color: black;
+}
+
+
+/* SignUp Page Media Queries */
+
+@media(width > 900px) {
+    .signup-container,
+    .loginContainer {
+        width: 50% !important;
+    }
+
+    .existingTodos .header{
+        flex-direction: row;
+    }
+
+    .existingTodos .header .detailsSection{
+        flex-direction: row;
+    }
 }
